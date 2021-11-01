@@ -94,5 +94,4 @@ module SimonControl(
 			state <= next_state;
 		end
 	end
-
 endmodule
