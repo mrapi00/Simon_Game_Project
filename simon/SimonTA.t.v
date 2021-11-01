@@ -97,8 +97,6 @@ module SimonTATest;
 		// ----------------------------------------------
 		`SHOW_MODE("Repeat");
 		`ASSERT_EQ(mode_leds, LED_MODE_REPEAT, "Mode should go to repeat after playback has ended!");
-		$display("MODE LEDS:");
-		$display(mode_leds);
 	
 		// Modify Switches
 		`SET(pattern, 4'b0001);
@@ -112,8 +110,7 @@ module SimonTATest;
 		// ----------------------------------------------
 		`SHOW_MODE("Input");
 		`ASSERT_EQ(mode_leds, LED_MODE_INPUT, "Mode should be input after successful repeat!");
-		$display("MODE LEDS:");
-		$display(mode_leds);
+		
 		// Modify level during game
 		`SET(level, 1);
 
@@ -125,39 +122,40 @@ module SimonTATest;
 
 		// Mode should stay input
 		`ASSERT_EQ(mode_leds, LED_MODE_INPUT, "Mode should remain in input if pattern invalid!");
-		$display("MODE LEDS:");
-		$display(mode_leds);
+
 		// Modify Switches
 		`SET(pattern, 4'b1000);
 
 		// Attempt to Insert Pattern
 		`CLOCK;
-
 		//-----------------------------------------------
 		// Playback Mode
 		// ----------------------------------------------
 		`SHOW_MODE("Playback");
 		`ASSERT_EQ(mode_leds, LED_MODE_PLAYBACK, "Mode should go to playback after input!");
-		$display("MODE LEDS:");
-		$display(mode_leds);
 		// Modify Switches
+				$display("MODE_LEDS:");
+		$display(mode_leds);
+		
 		`SET(pattern, 4'b0000);
 		`ASSERT_EQ(pattern_leds, 4'b0001, "Pattern LEDs should show first pattern in sequence!");
-		$display("PATTERN_LEDS:");
-		$display(pattern_leds);
+
 		// Go to next pattern
 		`CLOCK;
 		`ASSERT_EQ(pattern_leds, 4'b1000, "Pattern LEDs should show second pattern in sequence!");
 
 		// Go to repeat
 		`CLOCK;
-
+		$display("PATTERN_LEDS:");
+		$display(pattern_leds);
 		//-----------------------------------------------
 		// Repeat Mode
 		// ----------------------------------------------
 		`SHOW_MODE("Repeat");
 		`ASSERT_EQ(mode_leds, LED_MODE_REPEAT, "Mode should go to repeat after playback has ended!");
-
+				$display("MODE_LEDS:");
+		$display(mode_leds);
+		
 		// Insert first guess
 		`SET(pattern, 4'b0001);
 		`CLOCK;

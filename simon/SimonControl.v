@@ -86,8 +86,8 @@ module SimonControl(
 	always @(posedge clk) begin
 		if (rst) begin
 			// Update state to reset state
-			clrcount = 1;
-			state = INPUT;
+			clrcount <= 1;
+			state <= INPUT;
 		end
 		else begin
 			// Update state to next state
