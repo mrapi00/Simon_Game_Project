@@ -38,7 +38,6 @@ module Simon(
 		.clk           (uclk),
 		.level         (level),
 		.pattern       (pattern),
-
 		.select (select),
 		.mode_leds (mode_leds),
 		.clrcount (clrcount),

@@ -74,9 +74,9 @@ module SimonControl(
 			else next_state = PLAYBACK;
 		end 
 		else if (state == REPEAT) begin
+			if (repeat_eq_play && input_eq_pattern) next_state = INPUT;
+			if (!repeat_eq_play && input_eq_pattern) next_state = REPEAT;
 			if (!input_eq_pattern) next_state = DONE;
-			else if (repeat_eq_play) next_state = INPUT;
-			else next_state = REPEAT;
 		end
 		else if (state == DONE) 
 			next_state = DONE;
@@ -86,8 +86,8 @@ module SimonControl(
 	always @(posedge clk) begin
 		if (rst) begin
 			// Update state to reset state
-			state <= INPUT;
 			clrcount = 1;
+			state = INPUT;
 		end
 		else begin
 			// Update state to next state

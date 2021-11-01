@@ -112,7 +112,8 @@ module SimonTATest;
 		// ----------------------------------------------
 		`SHOW_MODE("Input");
 		`ASSERT_EQ(mode_leds, LED_MODE_INPUT, "Mode should be input after successful repeat!");
-
+		$display("MODE LEDS:");
+		$display(mode_leds);
 		// Modify level during game
 		`SET(level, 1);
 
@@ -124,7 +125,8 @@ module SimonTATest;
 
 		// Mode should stay input
 		`ASSERT_EQ(mode_leds, LED_MODE_INPUT, "Mode should remain in input if pattern invalid!");
-
+		$display("MODE LEDS:");
+		$display(mode_leds);
 		// Modify Switches
 		`SET(pattern, 4'b1000);
 

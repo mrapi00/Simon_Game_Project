@@ -28,6 +28,8 @@ module SimonDatapath(
 );
 
 	// Declare Local Vars Here
+	reg levelStore;
+	reg levelMaintain = 0;
 	reg [5:0] mux_output;
 	reg [5:0] count;
 	// reg [5:0] w_addr;
@@ -45,7 +47,6 @@ module SimonDatapath(
 	always @(posedge clk) begin
 		/* if (level == 1) 
 			is_legal = 1; */
-			
 		/* mux feeding into r_addr */
 		case (select)
 			2'b00: mux_output = playback;
@@ -70,15 +71,20 @@ module SimonDatapath(
 			if (playback == 6'b000000) 
 				count = count + 1;
 			r_addr = playback;
-			pattern_leds = r_data;
-			//playback = playback + 1;
+			//pattern_leds = r_data;
+			
 			repeatC = 6'b000000;
+			playback = playback + 1;
 		end
 		// REPEAT state variable setting
 		else if (mode_leds == 3'b100) begin
-			repeatC <= repeatC + 1;
-			r_addr <= repeatC;
-			done <= 6'b000000;
+			r_addr = repeatC;
+			$display("R_ADDR");
+			$display(r_addr);
+			$display("playback:");
+			$display(playback);
+			repeatC = repeatC + 1;
+			done = 6'b000000;
 			//pattern_leds <= pattern;
 		end
 		// DONE state variable setting
@@ -106,19 +112,23 @@ module SimonDatapath(
 	//----------------------------------------------------------------------
 
 	always @( * ) begin
+		if (!levelMaintain) begin
+			levelStore = level;
+			levelMaintain = 1;
+		end
 		// check legality
-		if (level == 1) 
+		if (levelStore == 1) 
 			is_legal = 1;
 		else if (pattern != 4'b0001 && pattern != 4'b0010 && pattern != 4'b0100 && pattern != 4'b1000) 
 			is_legal = 0;
 		else is_legal = 1;
 		
 		input_eq_pattern = (pattern == r_data);
-		repeat_eq_play = (playback == repeatC);
+		repeat_eq_play = (playback > repeatC);
 		play_gt_count = (playback == count); 
 
-		if (mode_leds == 3'b001) pattern_leds = pattern;
-		if (mode_leds == 3'b010) pattern_leds = r_data;
+		if (mode_leds == 3'b001 || mode_leds == 3'b100) pattern_leds = pattern;
+		if (mode_leds == 3'b010 || mode_leds == 3'b111) pattern_leds = r_data;
 	end
 
 endmodule
