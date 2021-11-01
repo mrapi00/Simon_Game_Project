@@ -31,12 +31,6 @@ module Memory
 	generate
 		for (i = 0; i < N_ELEMENTS; i = i + 1) begin : wport
 			always @(posedge clk) begin
-				if (i < 2) begin
-					$display("MEM# then CONTENT");
-			$display(i);
-			$display("%b",mem[i]);
-				end
-			
 				if (rst) begin
 					mem[i] <= 0;
 				end

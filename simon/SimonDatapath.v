@@ -49,8 +49,6 @@ module SimonDatapath(
 		/* if (level == 1) 
 			is_legal = 1; */
 		/* mux feeding into r_addr */
-		$display("COUNT");
-		$display("%b",count);
 	
 		case (select)
 			2'b00: mux_output = playback;
@@ -68,23 +66,26 @@ module SimonDatapath(
 		// INPUT state variable setting
 		if (mode_leds == 3'b001) begin
 			playback = 6'b000000;
-			r_addr = 0;
+			mux_output = 0;
 			//pattern_leds = pattern;
 		end
 		// PLAYBACK state variable setting
 		else if (mode_leds == 3'b010) begin
 			if (playback == 6'b000000) 
 				count = count + 1;
-			r_addr = playback;
+			// r_addr = playback;
 
 			//pattern_leds = r_data;
-			
+			$display("MUX_OUTPUT (aka r_addr)");
+			$display(mux_output);
+			$display("R_DATA");
+			$display(r_data);
 			repeatC = 6'b000000;
 			playback = playback + 1;
 		end
 		// REPEAT state variable setting
 		else if (mode_leds == 3'b100) begin
-			r_addr = repeatC;
+			// r_addr = repeatC;
 			repeatC = repeatC + 1;
 			done = 6'b000000;
 			//pattern_leds <= pattern;
