@@ -43,12 +43,15 @@ module SimonDatapath(
 	//----------------------------------------------------------------------
 
 	always @(posedge clk) begin
-		
+		/* if (level == 1) 
+			is_legal = 1; */
+			
 		/* mux feeding into r_addr */
 		case (select)
 			2'b00: mux_output = playback;
 			2'b01: mux_output = repeatC;
 			2'b10: mux_output = done;
+			default: mux_output = 0;
 		endcase
 
 		// reset count on reset
@@ -60,7 +63,7 @@ module SimonDatapath(
 		// INPUT state variable setting
 		if (mode_leds == 3'b001) begin
 			playback = 6'b000000;
-			pattern_leds = pattern;
+			//pattern_leds = pattern;
 		end
 		// PLAYBACK state variable setting
 		else if (mode_leds == 3'b010) begin
@@ -68,7 +71,7 @@ module SimonDatapath(
 				count = count + 1;
 			r_addr = playback;
 			pattern_leds = r_data;
-			playback = playback + 1;
+			//playback = playback + 1;
 			repeatC = 6'b000000;
 		end
 		// REPEAT state variable setting
@@ -76,13 +79,13 @@ module SimonDatapath(
 			repeatC <= repeatC + 1;
 			r_addr <= repeatC;
 			done <= 6'b000000;
-			pattern_leds <= pattern;
+			//pattern_leds <= pattern;
 		end
 		// DONE state variable setting
 		else if (mode_leds == 3'b111) begin
 			done <= done + 1;
 			r_addr <= done;
-			pattern_leds <= r_data;
+			//pattern_leds <= r_data;
 		end
 		
 	end
@@ -112,9 +115,10 @@ module SimonDatapath(
 		
 		input_eq_pattern = (pattern == r_data);
 		repeat_eq_play = (playback == repeatC);
-		play_gt_count = (playback > count); 
+		play_gt_count = (playback == count); 
 
-		pattern_leds = pattern;
+		if (mode_leds == 3'b001) pattern_leds = pattern;
+		if (mode_leds == 3'b010) pattern_leds = r_data;
 	end
 
 endmodule
