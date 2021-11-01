@@ -1,5 +1,5 @@
 $date
-	Mon Nov 01 13:10:54 2021
+	Mon Nov 01 13:44:24 2021
 $end
 $version
 	Icarus Verilog
@@ -30,7 +30,6 @@ $var wire 4 / pattern_leds [3:0] $end
 $var wire 3 0 mode_leds [2:0] $end
 $var wire 1 1 is_legal $end
 $var wire 1 2 input_eq_pattern $end
-$var wire 1 3 clrcount $end
 $scope module ctrl $end
 $var wire 1 * clk $end
 $var wire 1 ' rst $end
@@ -47,10 +46,10 @@ $var reg 1 + w_en $end
 $upscope $end
 $scope module dpath $end
 $var wire 1 * clk $end
-$var wire 1 3 clrcount $end
 $var wire 1 % level $end
 $var wire 3 8 mode_leds [2:0] $end
 $var wire 4 9 pattern [3:0] $end
+$var wire 1 ' rst $end
 $var wire 2 : select [1:0] $end
 $var wire 1 + w_en $end
 $var wire 4 ; r_data [3:0] $end
@@ -943,10 +942,8 @@ b1 ;
 b1 F
 b10 5
 1.
+b0 C
 b0 B
-b1 !
-b1 /
-b1 A
 1*
 1#
 #110
@@ -961,6 +958,9 @@ b0 )
 b0 9
 b0 I
 #150
+b0 !
+b0 /
+b0 A
 b1 ,
 b1 6
 b1 :
@@ -973,12 +973,8 @@ b11 5
 1-
 b1 B
 b0 D
-b0 C
 b1 <
 b1 H
-b0 !
-b0 /
-b0 A
 1*
 1#
 #160
@@ -1003,15 +999,9 @@ b1 4
 b1 8
 b0 7
 b1 5
-0.
 0-
 b0 =
 b1 D
-b1 !
-b1 /
-b1 A
-b0 <
-b0 H
 1*
 1#
 #210
@@ -1031,15 +1021,12 @@ b1010 )
 b1010 9
 b1010 I
 #270
-b1010 J
-1.
-x2
+b1010 K
+0.
+12
 b0 B
-b1010 !
-b1010 /
-b1010 A
-bx ;
-bx F
+b1010 ;
+b1010 F
 b1 @
 b1 E
 1*
@@ -1052,13 +1039,13 @@ b1 5
 b1000 !
 b1000 /
 b1000 A
+02
 11
 b1000 &
 b1000 )
 b1000 9
 b1000 I
 #320
-b10 5
 b0 ,
 b0 6
 b0 :
@@ -1067,18 +1054,18 @@ b10 0
 b10 4
 b10 8
 0+
+12
 b1 7
-b1000 J
-bx !
-bx /
-bx A
+b1000 K
+b1000 ;
+b1000 F
 1*
 1#
 #330
 0*
 0#
 #350
-b10 5
+02
 01
 b0 &
 b0 )
@@ -1087,26 +1074,16 @@ b0 I
 #360
 b1 $
 #370
-b1 ,
-b1 6
-b1 :
-b100 "
-b100 0
-b100 4
-b100 8
-b10 7
-b11 5
+b1 !
+b1 /
+b1 A
 1-
-02
 b1 B
 b0 D
-b1 <
-b1 H
-b0 !
-b0 /
-b0 A
-b1000 ;
-b1000 F
+b10 <
+b10 H
+b1 ;
+b1 F
 b0 @
 b0 E
 1*
@@ -1117,6 +1094,94 @@ b0 E
 #390
 b10 $
 #400
+b10 5
+b1000 !
+b1000 /
+b1000 A
+1.
+b10 B
+b1 C
+b1000 ;
+b1000 F
+b1 @
+b1 E
+1*
+1#
+#410
+0*
+0#
+#420
+b11 $
+#430
+b10 5
+11
+b1 &
+b1 )
+b1 9
+b1 I
+#450
+b1 ,
+b1 6
+b1 :
+b100 "
+b100 0
+b100 4
+b100 8
+b10 7
+b10 5
+b1 !
+b1 /
+b1 A
+0.
+x2
+b11 B
+b10 C
+bx ;
+bx F
+b10 @
+b10 E
+1*
+1#
+#460
+0*
+0#
+#480
+b100 !
+b100 /
+b100 A
+b100 &
+b100 )
+b100 9
+b100 I
+#500
+b11 5
+02
+b1 D
+b0 C
+b1 ;
+b1 F
+b0 @
+b0 E
+1*
+1#
+#510
+0*
+0#
+#520
+b100 $
+#530
+b11 5
+b0 !
+b0 /
+b0 A
+01
+b0 &
+b0 )
+b0 9
+b0 I
+#540
+b101 $
+#550
 b1000 !
 b1000 /
 b1000 A
@@ -1128,93 +1193,30 @@ b111 0
 b111 4
 b111 8
 b11 7
-b11 5
-0.
-0-
-b1 D
-b0 <
-b0 H
-1*
-1#
-#410
-0*
-0#
-#420
-b11 $
-#430
-11
-b1 &
-b1 )
-b1 9
-b1 I
-#450
-b1 =
-b0 !
-b0 /
-b0 A
-1*
-1#
-#460
-0*
-0#
-#470
-b100 $
-#480
-b1000 !
-b1000 /
-b1000 A
-b100 &
-b100 )
-b100 9
-b100 I
-#500
+b10 D
 b1 C
-b10 =
-x2
-bx !
-bx /
-bx A
-bx ;
-bx F
+b1000 ;
+b1000 F
 b1 @
 b1 E
-1*
-1#
-#510
-0*
-0#
-#530
-01
-b0 &
-b0 )
-b0 9
-b0 I
-#540
-b101 $
-#550
-b10 C
-b11 =
-b0 !
-b0 /
-b0 A
-b10 @
-b10 E
 1*
 1#
 #560
 0*
 0#
-#570
-b110 $
 #580
-b11 C
-b100 =
-b11 @
-b11 E
+b0 C
+b1 =
+b1 !
+b1 /
+b1 A
+b1 ;
+b1 F
+b0 @
+b0 E
 1*
 1#
 #590
 0*
 0#
 #600
-b111 $

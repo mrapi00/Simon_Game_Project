@@ -9,11 +9,12 @@ module SimonDatapath(
 	input        clk,           // Clock
 	input        level,         // Switch for setting level
 	input  [3:0] pattern,       // Switches for creating pattern
+	input 	rst,
 
 	// Datapath Control Signals
 	input [1:0] select,
 	input [2:0] mode_leds,
-	input clrcount,
+	//input clrcount,
 	input w_en,
 
 	// Datapath Outputs to Control
@@ -38,7 +39,7 @@ module SimonDatapath(
 	reg [5:0] playback;
 	reg [5:0] repeatC;
 	reg [5:0] done;
-	
+
 	//----------------------------------------------------------------------
 	// Internal Logic -- Manipulate Registers, ALU's, Memories Local to
 	// the Datapath
@@ -48,6 +49,9 @@ module SimonDatapath(
 		/* if (level == 1) 
 			is_legal = 1; */
 		/* mux feeding into r_addr */
+		$display("COUNT");
+		$display("%b",count);
+	
 		case (select)
 			2'b00: mux_output = playback;
 			2'b01: mux_output = repeatC;
@@ -56,7 +60,7 @@ module SimonDatapath(
 		endcase
 
 		// reset count on reset
-		if (clrcount) begin
+		if (rst) begin
 			count = 6'b000000;
 			pattern_leds = 4'b0000;
 		end 
@@ -64,6 +68,7 @@ module SimonDatapath(
 		// INPUT state variable setting
 		if (mode_leds == 3'b001) begin
 			playback = 6'b000000;
+			r_addr = 0;
 			//pattern_leds = pattern;
 		end
 		// PLAYBACK state variable setting
@@ -71,6 +76,7 @@ module SimonDatapath(
 			if (playback == 6'b000000) 
 				count = count + 1;
 			r_addr = playback;
+
 			//pattern_leds = r_data;
 			
 			repeatC = 6'b000000;
@@ -79,10 +85,6 @@ module SimonDatapath(
 		// REPEAT state variable setting
 		else if (mode_leds == 3'b100) begin
 			r_addr = repeatC;
-			$display("R_ADDR");
-			$display(r_addr);
-			$display("playback:");
-			$display(playback);
 			repeatC = repeatC + 1;
 			done = 6'b000000;
 			//pattern_leds <= pattern;

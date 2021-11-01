@@ -138,10 +138,12 @@ module SimonTATest;
 		// ----------------------------------------------
 		`SHOW_MODE("Playback");
 		`ASSERT_EQ(mode_leds, LED_MODE_PLAYBACK, "Mode should go to playback after input!");
-
+		$display("MODE LEDS:");
+		$display(mode_leds);
 		// Modify Switches
 		`SET(pattern, 4'b0000);
 		`ASSERT_EQ(pattern_leds, 4'b0001, "Pattern LEDs should show first pattern in sequence!");
+		$display("PATTERN_LEDS:");
 		$display(pattern_leds);
 		// Go to next pattern
 		`CLOCK;
