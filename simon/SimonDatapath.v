@@ -18,7 +18,7 @@ module SimonDatapath(
 
 	// Datapath Outputs to Control
 	output reg is_legal,
-	output reg play_eq_count,
+	output reg play_gt_count,
 	output reg repeat_eq_play,
 	output reg input_eq_pattern,
 
@@ -67,8 +67,8 @@ module SimonDatapath(
 			if (playback == 6'b000000) 
 				count = count + 1;
 			r_addr = playback;
-			playback = playback + 1;
 			pattern_leds = r_data;
+			playback = playback + 1;
 			repeatC = 6'b000000;
 		end
 		// REPEAT state variable setting
@@ -112,7 +112,7 @@ module SimonDatapath(
 		
 		input_eq_pattern = (pattern == r_data);
 		repeat_eq_play = (playback == repeatC);
-		play_eq_count = (playback > count); /* remember to change naming */
+		play_gt_count = (playback > count); 
 
 		pattern_leds = pattern;
 	end

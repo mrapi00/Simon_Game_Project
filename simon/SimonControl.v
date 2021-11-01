@@ -8,7 +8,7 @@ module SimonControl(
 	input        rst,           // Reset
 	// Datapath Inputs
 	input is_legal,
-	input play_eq_count,
+	input play_gt_count,
 	input repeat_eq_play,
 	input input_eq_pattern,
 
@@ -70,7 +70,7 @@ module SimonControl(
 			else next_state = INPUT;
 		end
 		else if (state == PLAYBACK) begin
-			if (play_eq_count) next_state = REPEAT;
+			if (play_gt_count) next_state = REPEAT;
 			else next_state = PLAYBACK;
 		end 
 		else if (state == REPEAT) begin

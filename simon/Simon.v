@@ -29,7 +29,7 @@ module Simon(
 
 	// Datapath Outputs to Control
 	wire is_legal;
-	wire play_eq_count;
+	wire play_gt_count;
 	wire repeat_eq_play;
 	wire input_eq_pattern;
 
@@ -44,7 +44,7 @@ module Simon(
 		.clrcount (clrcount),
 		.w_en (w_en),
 		.is_legal (is_legal),
-		.play_eq_count (play_eq_count),
+		.play_gt_count (play_gt_count),
 		.repeat_eq_play (repeat_eq_play),
 		.input_eq_pattern (input_eq_pattern),
 		.pattern_leds (pattern_leds)
@@ -60,7 +60,7 @@ module Simon(
 		.clrcount (clrcount),
 		.w_en (w_en),
 		.is_legal (is_legal),
-		.play_eq_count (play_eq_count),
+		.play_gt_count (play_gt_count),
 		.repeat_eq_play (repeat_eq_play),
 		.input_eq_pattern (input_eq_pattern)
 	);
