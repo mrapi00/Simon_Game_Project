@@ -32,7 +32,13 @@ module SimonControlTest;
 	reg is_legal = 0;
 	reg index_lt_count = 0;
 	reg input_eq_pattern = 0;
-	wire cnt_count, clr_count, cnt_index, clr_index, read_Memory, w_en, set_level;
+	wire cnt_count; 
+	wire clr_count; 
+	wire cnt_index; 
+	wire clr_index;
+	wire read_Memory;
+	wire w_en;
+	wire set_level;
 	wire [2:0] mode_leds;
 
 
@@ -68,66 +74,7 @@ module SimonControlTest;
 	// Main Test Logic
 	initial begin
 		// Reset the game
-		`SET(rst, 1);
-		`ASSERT_EQ(clr_count,1,"Count not cleared on reset");
-		`ASSERT_EQ(set_level, 1, "Level load not 1 on reset");
-		`CLOCK;
-		`SET(rst, 0);
-		`ASSERT_EQ(clr_count,0,"Count clear not 0");
-		`ASSERT_EQ(set_level, 0, "Level load not 0");
-		`ASSERT_EQ(mode_leds, LED_MODE_INPUT, "Wrong mode");
-
-		`SET(is_legal, 1);
-		`ASSERT_EQ(w_en, 1 , "write enable when valid pattern");
-		`ASSERT_EQ(clr_index, 1, "clear index when valid pattern");
-		`ASSERT_EQ(read_Memory, 0, "displaying pattern in input mode");
 		
-		`CLOCK;
-
-		`SET(is_legal, 0);
-		`ASSERT_EQ(mode_leds, LED_MODE_PLAYBACK, "mode not in playback");
-		`ASSERT_EQ(read_Memory, 1, "playback not displaying mem");
-		
-		`SET(index_lt_count, 1)
-
-		`ASSERT_EQ(cnt_index, 1, "not incrementing index");
-		`ASSERT_EQ(clr_index, 0, "clearing index too soon");
-
-		`CLOCK;
-		`ASSERT_EQ(mode_leds, LED_MODE_PLAYBACK, "mode didn't stay in playback");
-
-		`SET(index_lt_count, 0);
-		`CLOCK;
-
-		`SET(index_lt_count, 0);
-		`SET(input_eq_pattern, 1);
-
-		`ASSERT_EQ(mode_leds, LED_MODE_REPEAT, "mode not in repeat");
-		`ASSERT_EQ(read_Memory, 0, "not displaying switches");
-		`ASSERT_EQ(clr_index, 0, "clearing without being done");
-		`ASSERT_EQ(cnt_count, 1, "not incrementing count");
-
-		`CLOCK;
-		`ASSERT_EQ(mode_leds, LED_MODE_INPUT, "Did not go into input mode");	
-
-		`SET(is_legal,0);
-		`ASSERT_EQ(w_en, 0, "writing incorrect pattern");
-		`ASSERT_EQ(read_Memory, 0, "not displaying pattern");
-
-		`CLOCK;
-		`ASSERT_EQ(mode_leds, LED_MODE_INPUT, "advanced to playback without correct pattern");
-
-		`SET(is_legal, 1);
-		`CLOCK;
-		`SET(index_lt_count, 0);
-		`CLOCK;
-
-		`ASSERT_EQ(mode_leds, LED_MODE_REPEAT, "Mode not in repeat");
-
-		`SET(input_eq_pattern, 0);
-		`CLOCK;
-		`ASSERT_EQ(mode_leds, LED_MODE_DONE, "Mode not done after incorrect pattern");
-
 		$finish;
 	end
 endmodule
