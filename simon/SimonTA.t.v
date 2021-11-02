@@ -139,7 +139,8 @@ module SimonTATest;
 		
 		`SET(pattern, 4'b0000);
 		`ASSERT_EQ(pattern_leds, 4'b0001, "Pattern LEDs should show first pattern in sequence!");
-
+		$display("PATTERN_LEDS:");
+		$display(pattern_leds);
 		// Go to next pattern
 		`CLOCK;
 		`ASSERT_EQ(pattern_leds, 4'b1000, "Pattern LEDs should show second pattern in sequence!");
@@ -159,6 +160,8 @@ module SimonTATest;
 		// Insert first guess
 		`SET(pattern, 4'b0001);
 		`CLOCK;
+		$display("MODE_LEDS:");
+		$display(mode_leds);
 		`ASSERT_EQ(mode_leds, LED_MODE_REPEAT, "Mode should remain in repeat after first successful guess!");
 
 		// Insert second guess

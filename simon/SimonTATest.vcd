@@ -1,5 +1,5 @@
 $date
-	Mon Nov 01 17:36:23 2021
+	Mon Nov 01 22:09:42 2021
 $end
 $version
 	Icarus Verilog
@@ -23,56 +23,60 @@ $var wire 1 # pclk $end
 $var wire 1 ' rst $end
 $var wire 1 * uclk $end
 $var wire 1 + w_en $end
-$var wire 2 , select [1:0] $end
-$var wire 1 - repeat_eq_play $end
-$var wire 1 . play_gt_count $end
-$var wire 4 / pattern_leds [3:0] $end
-$var wire 3 0 mode_leds [2:0] $end
-$var wire 1 1 is_legal $end
-$var wire 1 2 input_eq_pattern $end
+$var wire 1 , set_level $end
+$var wire 1 - read_Memory $end
+$var wire 4 . pattern_leds [3:0] $end
+$var wire 3 / mode_leds [2:0] $end
+$var wire 1 0 is_legal $end
+$var wire 1 1 input_eq_pattern $end
+$var wire 1 2 index_lt_count $end
+$var wire 1 3 cnt_index $end
+$var wire 1 4 cnt_count $end
+$var wire 1 5 clr_index $end
+$var wire 1 6 clr_count $end
 $scope module ctrl $end
 $var wire 1 * clk $end
 $var wire 1 ' rst $end
-$var wire 1 - repeat_eq_play $end
-$var wire 1 . play_gt_count $end
-$var wire 1 1 is_legal $end
-$var wire 1 2 input_eq_pattern $end
-$var reg 1 3 clrcount $end
-$var reg 3 4 mode_leds [2:0] $end
-$var reg 2 5 next_state [1:0] $end
-$var reg 2 6 select [1:0] $end
-$var reg 2 7 state [1:0] $end
+$var wire 1 0 is_legal $end
+$var wire 1 1 input_eq_pattern $end
+$var wire 1 2 index_lt_count $end
+$var reg 1 6 clr_count $end
+$var reg 1 5 clr_index $end
+$var reg 1 4 cnt_count $end
+$var reg 1 3 cnt_index $end
+$var reg 3 7 mode_leds [2:0] $end
+$var reg 2 8 next_state [1:0] $end
+$var reg 1 - read_Memory $end
+$var reg 1 , set_level $end
+$var reg 2 9 state [1:0] $end
 $var reg 1 + w_en $end
 $upscope $end
 $scope module dpath $end
 $var wire 1 * clk $end
+$var wire 1 6 clr_count $end
+$var wire 1 5 clr_index $end
+$var wire 1 4 cnt_count $end
+$var wire 1 3 cnt_index $end
 $var wire 1 % level $end
-$var wire 3 8 mode_leds [2:0] $end
-$var wire 4 9 pattern [3:0] $end
-$var wire 1 ' rst $end
-$var wire 2 : select [1:0] $end
+$var wire 4 : pattern [3:0] $end
+$var wire 1 - read_Memory $end
+$var wire 1 , set_level $end
 $var wire 1 + w_en $end
 $var wire 4 ; r_data [3:0] $end
 $var reg 6 < count [5:0] $end
-$var reg 6 = done [5:0] $end
-$var reg 1 2 input_eq_pattern $end
-$var reg 1 1 is_legal $end
-$var reg 1 > levelMaintain $end
-$var reg 1 ? levelStore $end
-$var reg 6 @ mux_output [5:0] $end
-$var reg 4 A pattern_leds [3:0] $end
-$var reg 1 . play_gt_count $end
-$var reg 6 B playback [5:0] $end
-$var reg 6 C r_addr [5:0] $end
-$var reg 6 D repeatC [5:0] $end
-$var reg 1 - repeat_eq_play $end
+$var reg 6 = index [5:0] $end
+$var reg 1 2 index_lt_count $end
+$var reg 1 1 input_eq_pattern $end
+$var reg 1 0 is_legal $end
+$var reg 1 > level_for_game $end
+$var reg 4 ? pattern_leds [3:0] $end
 $scope module mem $end
 $var wire 1 * clk $end
-$var wire 6 E r_addr [5:0] $end
-$var wire 4 F r_data [3:0] $end
-$var wire 1 G rst $end
-$var wire 6 H w_addr [5:0] $end
-$var wire 4 I w_data [3:0] $end
+$var wire 6 @ r_addr [5:0] $end
+$var wire 4 A r_data [3:0] $end
+$var wire 1 B rst $end
+$var wire 6 C w_addr [5:0] $end
+$var wire 4 D w_data [3:0] $end
 $var wire 1 + w_en $end
 $scope begin wport[0] $end
 $upscope $end
@@ -210,7 +214,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 J \mem[0] [3:0] $end
+$var reg 4 E \mem[0] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -219,7 +223,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 K \mem[1] [3:0] $end
+$var reg 4 F \mem[1] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -228,7 +232,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 L \mem[2] [3:0] $end
+$var reg 4 G \mem[2] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -237,7 +241,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 M \mem[3] [3:0] $end
+$var reg 4 H \mem[3] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -246,7 +250,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 N \mem[4] [3:0] $end
+$var reg 4 I \mem[4] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -255,7 +259,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 O \mem[5] [3:0] $end
+$var reg 4 J \mem[5] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -264,7 +268,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 P \mem[6] [3:0] $end
+$var reg 4 K \mem[6] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -273,7 +277,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 Q \mem[7] [3:0] $end
+$var reg 4 L \mem[7] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -282,7 +286,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 R \mem[8] [3:0] $end
+$var reg 4 M \mem[8] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -291,7 +295,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 S \mem[9] [3:0] $end
+$var reg 4 N \mem[9] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -300,7 +304,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 T \mem[10] [3:0] $end
+$var reg 4 O \mem[10] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -309,7 +313,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 U \mem[11] [3:0] $end
+$var reg 4 P \mem[11] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -318,7 +322,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 V \mem[12] [3:0] $end
+$var reg 4 Q \mem[12] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -327,7 +331,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 W \mem[13] [3:0] $end
+$var reg 4 R \mem[13] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -336,7 +340,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 X \mem[14] [3:0] $end
+$var reg 4 S \mem[14] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -345,7 +349,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 Y \mem[15] [3:0] $end
+$var reg 4 T \mem[15] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -354,7 +358,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 Z \mem[16] [3:0] $end
+$var reg 4 U \mem[16] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -363,7 +367,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 [ \mem[17] [3:0] $end
+$var reg 4 V \mem[17] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -372,7 +376,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 \ \mem[18] [3:0] $end
+$var reg 4 W \mem[18] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -381,7 +385,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 ] \mem[19] [3:0] $end
+$var reg 4 X \mem[19] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -390,7 +394,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 ^ \mem[20] [3:0] $end
+$var reg 4 Y \mem[20] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -399,7 +403,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 _ \mem[21] [3:0] $end
+$var reg 4 Z \mem[21] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -408,7 +412,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 ` \mem[22] [3:0] $end
+$var reg 4 [ \mem[22] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -417,7 +421,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 a \mem[23] [3:0] $end
+$var reg 4 \ \mem[23] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -426,7 +430,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 b \mem[24] [3:0] $end
+$var reg 4 ] \mem[24] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -435,7 +439,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 c \mem[25] [3:0] $end
+$var reg 4 ^ \mem[25] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -444,7 +448,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 d \mem[26] [3:0] $end
+$var reg 4 _ \mem[26] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -453,7 +457,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 e \mem[27] [3:0] $end
+$var reg 4 ` \mem[27] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -462,7 +466,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 f \mem[28] [3:0] $end
+$var reg 4 a \mem[28] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -471,7 +475,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 g \mem[29] [3:0] $end
+$var reg 4 b \mem[29] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -480,7 +484,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 h \mem[30] [3:0] $end
+$var reg 4 c \mem[30] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -489,7 +493,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 i \mem[31] [3:0] $end
+$var reg 4 d \mem[31] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -498,7 +502,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 j \mem[32] [3:0] $end
+$var reg 4 e \mem[32] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -507,7 +511,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 k \mem[33] [3:0] $end
+$var reg 4 f \mem[33] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -516,7 +520,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 l \mem[34] [3:0] $end
+$var reg 4 g \mem[34] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -525,7 +529,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 m \mem[35] [3:0] $end
+$var reg 4 h \mem[35] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -534,7 +538,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 n \mem[36] [3:0] $end
+$var reg 4 i \mem[36] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -543,7 +547,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 o \mem[37] [3:0] $end
+$var reg 4 j \mem[37] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -552,7 +556,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 p \mem[38] [3:0] $end
+$var reg 4 k \mem[38] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -561,7 +565,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 q \mem[39] [3:0] $end
+$var reg 4 l \mem[39] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -570,7 +574,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 r \mem[40] [3:0] $end
+$var reg 4 m \mem[40] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -579,7 +583,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 s \mem[41] [3:0] $end
+$var reg 4 n \mem[41] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -588,7 +592,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 t \mem[42] [3:0] $end
+$var reg 4 o \mem[42] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -597,7 +601,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 u \mem[43] [3:0] $end
+$var reg 4 p \mem[43] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -606,7 +610,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 v \mem[44] [3:0] $end
+$var reg 4 q \mem[44] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -615,7 +619,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 w \mem[45] [3:0] $end
+$var reg 4 r \mem[45] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -624,7 +628,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 x \mem[46] [3:0] $end
+$var reg 4 s \mem[46] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -633,7 +637,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 y \mem[47] [3:0] $end
+$var reg 4 t \mem[47] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -642,7 +646,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 z \mem[48] [3:0] $end
+$var reg 4 u \mem[48] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -651,7 +655,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 { \mem[49] [3:0] $end
+$var reg 4 v \mem[49] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -660,7 +664,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 | \mem[50] [3:0] $end
+$var reg 4 w \mem[50] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -669,7 +673,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 } \mem[51] [3:0] $end
+$var reg 4 x \mem[51] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -678,7 +682,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 ~ \mem[52] [3:0] $end
+$var reg 4 y \mem[52] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -687,7 +691,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 !" \mem[53] [3:0] $end
+$var reg 4 z \mem[53] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -696,7 +700,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 "" \mem[54] [3:0] $end
+$var reg 4 { \mem[54] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -705,7 +709,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 #" \mem[55] [3:0] $end
+$var reg 4 | \mem[55] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -714,7 +718,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 $" \mem[56] [3:0] $end
+$var reg 4 } \mem[56] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -723,7 +727,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 %" \mem[57] [3:0] $end
+$var reg 4 ~ \mem[57] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -732,7 +736,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 &" \mem[58] [3:0] $end
+$var reg 4 !" \mem[58] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -741,7 +745,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 '" \mem[59] [3:0] $end
+$var reg 4 "" \mem[59] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -750,7 +754,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 (" \mem[60] [3:0] $end
+$var reg 4 #" \mem[60] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -759,7 +763,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 )" \mem[61] [3:0] $end
+$var reg 4 $" \mem[61] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -768,7 +772,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 *" \mem[62] [3:0] $end
+$var reg 4 %" \mem[62] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -777,7 +781,7 @@ $scope module SimonTATest $end
 $scope module simon $end
 $scope module dpath $end
 $scope module mem $end
-$var reg 4 +" \mem[63] [3:0] $end
+$var reg 4 &" \mem[63] [3:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -785,11 +789,6 @@ $upscope $end
 $enddefinitions $end
 #0
 $dumpvars
-bx +"
-bx *"
-bx )"
-bx ("
-bx '"
 bx &"
 bx %"
 bx $"
@@ -849,37 +848,37 @@ bx M
 bx L
 bx K
 bx J
-b0 I
+bx I
 bx H
-0G
+bx G
 bx F
 bx E
-bx D
-bx C
-bx B
+b0 D
+b0 C
+0B
 bx A
-bx @
-0?
-1>
-bx =
-bx <
+b0 @
+b0 ?
+x>
+b0 =
+b0 <
 bx ;
-bx :
-b0 9
+b0 :
+bx 9
 bx 8
 bx 7
-bx 6
-bx 5
-bx 4
-x3
-x2
-01
-bx 0
+06
+05
+04
+03
+02
+x1
+00
 bx /
-x.
+b0 .
 x-
-bx ,
-x+
+0,
+0+
 0*
 b0 )
 b1000000 (
@@ -889,123 +888,110 @@ b0 &
 b0 $
 0#
 bx "
-bx !
+b0 !
 $end
 #10
+1,
+15
+16
 1'
 #30
-b0 5
+0-
+05
 b1 "
-b1 0
-b1 4
-b1 8
-1+
-b0 7
-13
-b0 !
-b0 /
-b0 A
-b0 <
-b0 H
-b0 @
-b0 E
+b1 /
+b1 7
+b0 8
+0>
+b0 9
 1*
 1#
 #40
 0*
 0#
 #60
+0,
+06
 0'
 #80
-b1 5
+15
+1+
+b1 8
+10
 b1 !
-b1 /
-b1 A
-11
+b1 .
+b1 ?
 b1 &
 b1 )
-b1 9
-b1 I
+b1 :
+b1 D
 #100
-b0 ,
-b0 6
-b0 :
+1-
 b10 "
-b10 0
-b10 4
-b10 8
+b10 /
+b10 7
+15
 0+
-12
-b1 7
-b1 J
+b10 8
+11
+b1 9
+b1 E
 b1 ;
-b1 F
-b10 5
-1.
-b0 B
+b1 A
 1*
 1#
 #110
 0*
 0#
 #130
-b10 5
-02
+15
+00
 01
 b0 &
 b0 )
-b0 9
-b0 I
+b0 :
+b0 D
 #150
 b0 !
-b0 /
-b0 A
-b1 ,
-b1 6
-b1 :
+b0 .
+b0 ?
+0-
 b100 "
-b100 0
-b100 4
-b100 8
-b10 7
-b11 5
-1-
-b0 D
-b1 B
-b1 <
-b1 H
+b100 /
+b100 7
+15
+b11 8
+b10 9
 1*
 1#
 #160
 0*
 0#
 #180
-b0 5
+14
+05
+b0 8
+10
 b1 !
-b1 /
-b1 A
-12
+b1 .
+b1 ?
 11
 b1 &
 b1 )
-b1 9
-b1 I
+b1 :
+b1 D
 #200
+15
 1+
 b1 "
-b1 0
-b1 4
+b1 /
+b1 7
+04
 b1 8
-b0 7
-b1 5
-0-
-x2
-b0 =
-b1 D
-bx ;
-bx F
-b1 @
-b1 E
+12
+b0 9
+b1 <
+b1 C
 1*
 1#
 #210
@@ -1014,123 +1000,122 @@ b1 E
 #230
 1%
 #250
-b0 5
+05
+0+
+b0 8
+00
 b1010 !
-b1010 /
-b1010 A
+b1010 .
+b1010 ?
 01
 b1010 &
 b1010 )
-b1010 9
-b1010 I
+b1010 :
+b1010 D
 #270
-b1010 K
-0.
-02
-b1 ;
-b1 F
-b0 @
-b0 E
-b0 B
 1*
 1#
 #280
 0*
 0#
 #300
-b1 5
+15
+1+
+b1 8
+10
 b1000 !
-b1000 /
-b1000 A
-11
+b1000 .
+b1000 ?
 b1000 &
 b1000 )
-b1000 9
-b1000 I
+b1000 :
+b1000 D
 #320
 b1 !
-b1 /
-b1 A
-b0 ,
-b0 6
-b0 :
+b1 .
+b1 ?
+13
+1-
 b10 "
-b10 0
-b10 4
-b10 8
+b10 /
+b10 7
+05
 0+
-b1 7
-b1000 K
+b1 9
+b1000 F
 1*
 1#
 #330
 0*
 0#
 #350
-01
+13
+00
 b0 &
 b0 )
-b0 9
-b0 I
-#370
-b1000 !
-b1000 /
-b1000 A
-1-
+b0 :
 b0 D
-b1 B
-b10 <
-b10 H
+#370
+15
+03
+b10 8
+b1000 !
+b1000 .
+b1000 ?
+02
 b1000 ;
-b1000 F
+b1000 A
+b1 =
 b1 @
-b1 E
 1*
 1#
 #380
 0*
 0#
 #400
-b10 5
-bx !
-bx /
-bx A
-1.
-x2
-b10 B
-bx ;
-bx F
-b10 @
-b10 E
+0-
+b100 "
+b100 /
+b100 7
+15
+b11 8
+b0 !
+b0 .
+b0 ?
+12
+b10 9
+b1 ;
+b1 A
+b0 =
+b0 @
 1*
 1#
 #410
 0*
 0#
-#420
-b1 $
 #430
-b10 5
+13
+05
+b10 8
+10
+b1 !
+b1 .
+b1 ?
 11
 b1 &
 b1 )
-b1 9
-b1 I
-#450
-b1 !
-b1 /
-b1 A
-b1 ,
-b1 6
 b1 :
-b100 "
-b100 0
-b100 4
-b100 8
-b10 7
-b10 5
-0.
-b11 B
+b1 D
+#450
+15
+03
+b11 8
+01
+02
+b1000 ;
+b1000 A
+b1 =
+b1 @
 1*
 1#
 #460
@@ -1138,50 +1123,70 @@ b11 B
 0#
 #480
 b100 !
-b100 /
-b100 A
+b100 .
+b100 ?
 b100 &
 b100 )
-b100 9
-b100 I
+b100 :
+b100 D
 #500
-b1 D
-b11 @
-b11 E
+b1 !
+b1 .
+b1 ?
+13
+1-
+b111 "
+b111 /
+b111 7
+05
+12
+b11 9
+b1 ;
+b1 A
+b0 =
+b0 @
 1*
 1#
 #510
 0*
 0#
-#520
-b10 $
 #530
-b0 !
-b0 /
-b0 A
-01
+13
+00
 b0 &
 b0 )
-b0 9
-b0 I
-#540
-b11 $
+b0 :
+b0 D
 #550
-b10 D
+15
+03
+b1000 !
+b1000 .
+b1000 ?
+02
+b1000 ;
+b1000 A
+b1 =
+b1 @
 1*
 1#
 #560
 0*
 0#
-#570
-b100 $
 #580
-0-
-b11 D
+13
+05
+b1 !
+b1 .
+b1 ?
+12
+b1 ;
+b1 A
+b0 =
+b0 @
 1*
 1#
 #590
 0*
 0#
 #600
-b110 $

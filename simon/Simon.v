@@ -16,53 +16,58 @@ module Simon(
 );
 
 	// Declare local connections here
-	// wire localconn1; ...
+	wire      cnt_count;
+	wire      clr_count;
+	wire 	  cnt_index;
+	wire 	  clr_index;
+	wire 	  w_en;
+	wire 	  set_level;
+	wire 	  read_Memory;
+	wire      index_lt_count;
+	wire 	  input_eq_pattern;
+	wire 	  is_legal;
 
 	//--------------------------------------------
 	// IMPORTANT!!!! If simulating, use this line:
 	//--------------------------------------------
 	wire uclk = pclk;
-	wire [1:0] select;
-	wire [2:0] mode_leds;
-	wire clrcount;
-	wire w_en;
-
-	// Datapath Outputs to Control
-	wire is_legal;
-	wire play_gt_count;
-	wire repeat_eq_play;
-	wire input_eq_pattern;
-
+	
 	// Datapath -- Add port connections
 	SimonDatapath dpath(
 		.clk           (uclk),
 		.level         (level),
 		.pattern       (pattern),
-		.rst (rst),
-		.select (select),
-		.mode_leds (mode_leds),
-		//.clrcount (clrcount),
+		.cnt_count (cnt_count),
+		.clr_count (clr_count),
+		.cnt_index (cnt_index),
+		.clr_index (clr_index),
 		.w_en (w_en),
-		.is_legal (is_legal),
-		.play_gt_count (play_gt_count),
-		.repeat_eq_play (repeat_eq_play),
+		.set_level (set_level),
+		.read_Memory (read_Memory),
+		.index_lt_count (index_lt_count),
 		.input_eq_pattern (input_eq_pattern),
-		.pattern_leds (pattern_leds)
+		.is_legal (is_legal),
+
+		.pattern_leds(pattern_leds)
 	);
 
 	// Control -- Add port connections
 	SimonControl ctrl(
 		.clk           (uclk),
 		.rst           (rst),
-
-		.select (select),
-		.mode_leds (mode_leds),
-		//.clrcount (clrcount),
+		
+		.cnt_count (cnt_count),
+		.clr_count (clr_count),
+		.cnt_index (cnt_index),
+		.clr_index (clr_index),
 		.w_en (w_en),
+		.set_level (set_level),
+		.read_Memory (read_Memory),
+		.index_lt_count (index_lt_count),
+		.input_eq_pattern (input_eq_pattern),
 		.is_legal (is_legal),
-		.play_gt_count (play_gt_count),
-		.repeat_eq_play (repeat_eq_play),
-		.input_eq_pattern (input_eq_pattern)
+		
+		.mode_leds (mode_leds) 
 	);
 
 endmodule

@@ -6,17 +6,20 @@ module SimonControl(
 	// External Inputs
 	input        clk,           // Clock
 	input        rst,           // Reset
+
 	// Datapath Inputs
-	input is_legal,
-	input play_gt_count,
-	input repeat_eq_play,
-	input input_eq_pattern,
+	input     index_lt_count,
+	input 	  input_eq_pattern,
+	input 	  is_legal,
 
 	// Datapath Control Outputs
-	output reg [1:0] select,
-	output reg clrcount,
-	output reg w_en,
-
+	output    reg cnt_count,
+	output	  reg clr_count,
+	output	  reg cnt_index,
+	output 	  reg clr_index,
+	output 	  reg read_Memory,
+	output 	  reg w_en,
+	output 	  reg set_level,
 	// External Outputs
 	output reg [2:0] mode_leds
 );
@@ -39,54 +42,67 @@ module SimonControl(
 
 	// Output Combinational Logic
 	always @( * ) begin
-		// Set defaults
-		w_en = 0;
+		//defaults
+		w_en <= 0;
+		clr_count <= rst;
+		cnt_count <= 0;
+		clr_index <= rst;
+		cnt_index <= 0;
+		set_level <= rst;
 		
-		// Write your output logic here
 		if (state == INPUT) begin
-			mode_leds = 3'b001;
-			w_en = 1;
+			mode_leds <= LED_MODE_INPUT;
+			w_en <= is_legal;
+			clr_index <= is_legal;
+			read_Memory <= 0;
 		end
-		if (state == PLAYBACK) begin
-			mode_leds = 3'b010;
-			select = 2'b00;
+		else if (state == PLAYBACK) begin
+			mode_leds <= LED_MODE_PLAYBACK;
+			cnt_index <= index_lt_count;
+			clr_index <= !index_lt_count;
+			read_Memory <= 1;
 		end
-		if (state == REPEAT) begin
-			mode_leds = 3'b100;
-			select = 2'b01;
+		else if (state == REPEAT) begin
+			mode_leds <= LED_MODE_REPEAT;
+			cnt_index <= index_lt_count & input_eq_pattern;
+			clr_index <= !input_eq_pattern;
+			cnt_count <= !index_lt_count & input_eq_pattern;
+			read_Memory <= 0;
 		end
-		if (state == DONE) begin
-			mode_leds = 3'b111;
-			select = 2'b10;
+		else if (state == DONE) begin
+			mode_leds <= LED_MODE_DONE;
+			cnt_index <= index_lt_count;
+			clr_index <= !index_lt_count;
+			read_Memory <= 1;
 		end
+
 	end
 
 	// Next State Combinational Logic
 	always @( * ) begin
-		next_state = state;
-		// Write your Next State Logic Here
 		if (state == INPUT) begin
-			if (is_legal) next_state = PLAYBACK;
-			else next_state = INPUT;
+			if (!is_legal) next_state = INPUT;
+			else next_state = PLAYBACK;
 		end
 		else if (state == PLAYBACK) begin
-			if (play_gt_count) next_state = REPEAT;
-			else next_state = PLAYBACK;
-		end 
-		else if (state == REPEAT) begin
-			if (repeat_eq_play && input_eq_pattern) next_state = INPUT;
-			if (!repeat_eq_play && input_eq_pattern) next_state = REPEAT;
-			if (!input_eq_pattern) next_state = DONE;
+			if (index_lt_count) next_state = PLAYBACK;
+			else next_state = REPEAT;
 		end
-		else if (state == DONE) 
+		else if (state == REPEAT) begin
+			if (index_lt_count & input_eq_pattern) next_state = REPEAT;
+			else if (!index_lt_count & input_eq_pattern) next_state = INPUT;
+			else next_state = DONE;
+		end
+		else if (state == DONE) begin
 			next_state = DONE;
+		end
+		
 	end
 
 	// State Update Sequential Logic
 	always @(posedge clk) begin
 		if (rst) begin
 			// Update state to reset state
-			clrcount <= 1;
 			state <= INPUT;
 		end
 		else begin
@@ -94,4 +110,5 @@ module SimonControl(
 			state <= next_state;
 		end
 	end
+
 endmodule
