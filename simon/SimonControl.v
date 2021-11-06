@@ -43,37 +43,37 @@ module SimonControl(
 	// Output Combinational Logic
 	always @( * ) begin
 		//defaults
-		w_en <= 0;
-		clr_count <= rst;
-		cnt_count <= 0;
-		clr_index <= rst;
-		cnt_index <= 0;
-		set_level <= rst;
+		w_en = 0;
+		clr_count = rst;
+		cnt_count = 0;
+		clr_index = rst;
+		cnt_index = 0;
+		set_level = rst;
 		
 		if (state == INPUT) begin
-			mode_leds <= LED_MODE_INPUT;
-			w_en <= is_legal;
-			clr_index <= is_legal;
-			read_Memory <= 0;
+			mode_leds = LED_MODE_INPUT;
+			w_en = is_legal;
+			clr_index = is_legal;
+			read_Memory = 0;
 		end
 		else if (state == PLAYBACK) begin
-			mode_leds <= LED_MODE_PLAYBACK;
-			cnt_index <= index_lt_count;
-			clr_index <= !index_lt_count;
-			read_Memory <= 1;
+			mode_leds = LED_MODE_PLAYBACK;
+			cnt_index = index_lt_count;
+			clr_index = !index_lt_count;
+			read_Memory = 1;
 		end
 		else if (state == REPEAT) begin
-			mode_leds <= LED_MODE_REPEAT;
-			cnt_index <= index_lt_count & input_eq_pattern;
-			clr_index <= !input_eq_pattern;
-			cnt_count <= !index_lt_count & input_eq_pattern;
-			read_Memory <= 0;
+			mode_leds = LED_MODE_REPEAT;
+			cnt_index = index_lt_count & input_eq_pattern;
+			clr_index = !input_eq_pattern;
+			cnt_count = !index_lt_count & input_eq_pattern;
+			read_Memory = 0;
 		end
 		else if (state == DONE) begin
-			mode_leds <= LED_MODE_DONE;
-			cnt_index <= index_lt_count;
-			clr_index <= !index_lt_count;
-			read_Memory <= 1;
+			mode_leds = LED_MODE_DONE;
+			cnt_index = index_lt_count;
+			clr_index = !index_lt_count;
+			read_Memory = 1;
 		end
 
 	end
