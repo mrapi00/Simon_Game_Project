@@ -61,8 +61,9 @@ module SimonTest;
 
 	// Main Test Logic
 	initial begin
-		// Reset the game
+		// Reset the game (hard mode)
 		`SHOW_MODE("Unknown");
+		`SET(level, 1);
 		`SET(rst, 1);
 		`CLOCK;
 
@@ -71,9 +72,180 @@ module SimonTest;
 		// ----------------------------------------------
 		`SHOW_MODE("Input");
 		`SET(rst, 0);
+		`ASSERT_EQ(mode_leds, LED_MODE_INPUT, "Mode should be input after reset!");
+		`ASSERT_EQ(pattern_leds, pattern, "Pattern LEDs should match switches in input mode!");
+		// Modify Switches
+		`SET(pattern, 4'b0011);
+		`ASSERT_EQ(pattern_leds, pattern, "Pattern LEDs should match switches in input mode!");
+		// Insert Pattern
+		`CLOCK;
 
-		// Write your test cases here!
+		//-----------------------------------------------
+		// Playback Mode
+		// ----------------------------------------------
+		`SHOW_MODE("Playback");
+		`ASSERT_EQ(mode_leds, LED_MODE_PLAYBACK, "Mode should go to playback after input!");
+		
+		// Modify Switches
+		`SET(pattern, 4'b0000);
+		`ASSERT_EQ(pattern_leds, 4'b0011, "Pattern LEDs should show first pattern in sequence!");
+	
+		// Advance
+		`CLOCK;
 
+		//-----------------------------------------------
+		// Repeat Mode
+		// ----------------------------------------------
+		`SHOW_MODE("Repeat");
+		`ASSERT_EQ(mode_leds, LED_MODE_REPEAT, "Mode should go to repeat after playback has ended!");
+	
+		// Modify Switches
+		`SET(pattern, 4'b0011);
+		`ASSERT_EQ(pattern_leds, 4'b0011, "Pattern LEDs should match switches in repeat mode");
+		
+		// Insert Guess
+		`CLOCK;
+
+		//-----------------------------------------------
+		// Input Mode
+		// ----------------------------------------------
+		`SHOW_MODE("Input");
+		`ASSERT_EQ(mode_leds, LED_MODE_INPUT, "Mode should be input after successful repeat!");
+		
+		// Modify level during game
+		`SET(level, 0);
+
+		// Modify Switches
+		`SET(pattern, 4'b1010);
+
+		// Insert Pattern (which should still work since modifying level shouldn't affect)
+		`CLOCK;
+		//-----------------------------------------------
+		// Playback Mode
+		// ----------------------------------------------
+		`SHOW_MODE("Playback");
+		`ASSERT_EQ(mode_leds, LED_MODE_PLAYBACK, "Mode should go to playback after input!");
+		// Modify Switches
+		
+		`SET(pattern, 4'b0000);
+		`ASSERT_EQ(pattern_leds, 4'b0011, "Pattern LEDs should show first pattern in sequence!");
+
+		// Go to next pattern
+		`CLOCK;
+		`ASSERT_EQ(pattern_leds, 4'b1010, "Pattern LEDs should show second pattern in sequence!");
+
+		// Go to repeat
+		`CLOCK;
+		//-----------------------------------------------
+		// Repeat Mode
+		// ----------------------------------------------
+		`SHOW_MODE("Repeat");
+		`ASSERT_EQ(mode_leds, LED_MODE_REPEAT, "Mode should go to repeat after playback has ended!");
+		
+		// Insert first guess
+		`SET(pattern, 4'b0011);
+		`CLOCK;
+		`ASSERT_EQ(mode_leds, LED_MODE_REPEAT, "Mode should remain in repeat after first successful guess!");
+
+		// Insert second guess
+		`SET(pattern, 4'b1010);
+		`ASSERT_EQ(mode_leds, LED_MODE_REPEAT, "Mode should remain in repeat after second successful guess!");
+		`CLOCK;
+
+		//-----------------------------------------------
+		// Input Mode
+		// ----------------------------------------------
+		`SHOW_MODE("Input");
+		`ASSERT_EQ(mode_leds, LED_MODE_INPUT, "Mode should be input after successful repeat!");
+
+		// Modify Switches
+		`SET(pattern, 4'b1101);
+
+		// Insert Pattern
+		`CLOCK;
+		//-----------------------------------------------
+		// Playback Mode
+		// ----------------------------------------------
+		`SHOW_MODE("Playback");
+		`ASSERT_EQ(mode_leds, LED_MODE_PLAYBACK, "Mode should go to playback after input!");
+		// Modify Switches
+		
+		`SET(pattern, 4'b0000);
+		`ASSERT_EQ(pattern_leds, 4'b0011, "Pattern LEDs should show first pattern in sequence!");
+
+		// Go to next pattern
+		`CLOCK;
+		`ASSERT_EQ(pattern_leds, 4'b1010, "Pattern LEDs should show second pattern in sequence!");
+
+		// Go to next pattern
+		`CLOCK;
+		`ASSERT_EQ(pattern_leds, 4'b1101, "Pattern LEDs should show third pattern in sequence!");
+
+		// Go to repeat
+		`CLOCK;
+		//-----------------------------------------------
+		// Repeat Mode
+		// ----------------------------------------------
+		`SHOW_MODE("Repeat");
+		`ASSERT_EQ(mode_leds, LED_MODE_REPEAT, "Mode should go to repeat after playback has ended!");
+		
+		// Insert first guess
+		`SET(pattern, 4'b0011);
+		`CLOCK;
+		`ASSERT_EQ(mode_leds, LED_MODE_REPEAT, "Mode should remain in repeat after first successful guess!");
+
+		// Insert second guess (wrong guess)
+		`SET(pattern, 4'b1110);
+		`ASSERT_EQ(mode_leds, LED_MODE_REPEAT, "Mode should remain in repeat after second successful guess!");
+		`CLOCK;
+
+		/*
+		// Insert third guess (wrong guess)
+		`SET(pattern, 4'b1011);
+		`CLOCK; */
+		//-----------------------------------------------
+		// Done Mode
+		// ----------------------------------------------
+		`SHOW_MODE("Done");
+		`ASSERT_EQ(mode_leds, LED_MODE_DONE, "Mode should go to done after failed guess!");
+
+		// Modify Switches
+		`SET(pattern, 4'b0000);
+		`ASSERT_EQ(pattern_leds, 4'b0011, "Pattern LEDs should show first pattern in sequence!");
+
+		// Go to next (2nd) pattern
+		`CLOCK;
+		`ASSERT_EQ(pattern_leds, 4'b1010, "Pattern LEDs should show second pattern in sequence!");
+
+		// Go to next (3rd) pattern
+		`CLOCK;
+		`ASSERT_EQ(pattern_leds, 4'b1101, "Pattern LEDs should show third pattern in sequence!");
+
+		`ASSERT_EQ(mode_leds, LED_MODE_DONE, "Mode should stay in done");
+		
+		// Wrap around back to 1st pattern
+		`CLOCK;
+		`ASSERT_EQ(pattern_leds, 4'b0011, "Pattern LEDs should show first pattern in sequence!");
+
+		// Go to next (2nd) pattern
+		`CLOCK;
+		`ASSERT_EQ(pattern_leds, 4'b1010, "Pattern LEDs should show second pattern in sequence!");
+
+		// Go to next (3rd) pattern
+		`CLOCK;
+		`ASSERT_EQ(pattern_leds, 4'b1101, "Pattern LEDs should show third pattern in sequence!");
+
+		`ASSERT_EQ(mode_leds, LED_MODE_DONE, "Mode should stay in done");
+
+		// Wrap around back to 1st pattern
+		`CLOCK;
+		`SET(pattern, 4'b0000);
+		`ASSERT_EQ(pattern_leds, 4'b0011, "Pattern LEDs should show first pattern in sequence!");
+
+		// Go to next (2nd) pattern
+		`CLOCK;
+		`ASSERT_EQ(pattern_leds, 4'b1010, "Pattern LEDs should show second pattern in sequence!");
+		
 		$display("\nTESTS COMPLETED (%d FAILURES)", errors);
 		$finish;
 	end

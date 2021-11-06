@@ -73,6 +73,7 @@ module SimonTATest;
 		`SET(rst, 0);
 		`ASSERT_EQ(mode_leds, LED_MODE_INPUT, "Mode should be input after reset!");
 		`ASSERT_EQ(pattern_leds, pattern, "Pattern LEDs should match switches in input mode!");
+		
 		// Modify Switches
 		`SET(pattern, 4'b0001);
 		`ASSERT_EQ(pattern_leds, pattern, "Pattern LEDs should match switches in input mode!");
@@ -101,7 +102,7 @@ module SimonTATest;
 		// Modify Switches
 		`SET(pattern, 4'b0001);
 		`ASSERT_EQ(pattern_leds, 4'b0001, "Pattern LEDs should match switches in repeat mode");
-		//$display(pattern_leds);
+		
 		// Insert Guess
 		`CLOCK;
 
@@ -133,35 +134,26 @@ module SimonTATest;
 		// ----------------------------------------------
 		`SHOW_MODE("Playback");
 		`ASSERT_EQ(mode_leds, LED_MODE_PLAYBACK, "Mode should go to playback after input!");
+
 		// Modify Switches
-				$display("MODE_LEDS:");
-		$display(mode_leds);
-		
 		`SET(pattern, 4'b0000);
 		`ASSERT_EQ(pattern_leds, 4'b0001, "Pattern LEDs should show first pattern in sequence!");
-		$display("PATTERN_LEDS:");
-		$display(pattern_leds);
+
 		// Go to next pattern
 		`CLOCK;
 		`ASSERT_EQ(pattern_leds, 4'b1000, "Pattern LEDs should show second pattern in sequence!");
 
 		// Go to repeat
 		`CLOCK;
-		$display("PATTERN_LEDS:");
-		$display(pattern_leds);
 		//-----------------------------------------------
 		// Repeat Mode
 		// ----------------------------------------------
 		`SHOW_MODE("Repeat");
 		`ASSERT_EQ(mode_leds, LED_MODE_REPEAT, "Mode should go to repeat after playback has ended!");
-				$display("MODE_LEDS:");
-		$display(mode_leds);
-		
+
 		// Insert first guess
 		`SET(pattern, 4'b0001);
 		`CLOCK;
-		$display("MODE_LEDS:");
-		$display(mode_leds);
 		`ASSERT_EQ(mode_leds, LED_MODE_REPEAT, "Mode should remain in repeat after first successful guess!");
 
 		// Insert second guess
